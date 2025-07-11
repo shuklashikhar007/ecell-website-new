@@ -2,6 +2,78 @@ import React from "react";
 import Image from "next/legacy/image";
 import Footer from "@/components/Footer";
 import Nav from "../components/navbar/NavLayout";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { ExternalLink, Lightbulb, Zap, Rocket, Cpu, BarChart3, Sprout } from 'lucide-react';
+
+const incubators = [
+  {
+    id: 1,
+    title: "Ideation Innovation & Incubation Foundation",
+    shortTitle: "I3 Foundation",
+    description: "Umbrella organization at IIT BHU for nurturing start-ups with comprehensive support and mentorship programs.",
+    logo: <Lightbulb className="w-12 h-12 text-yellow-500" />,
+    category: "Innovation Hub",
+    website: "https://i3f.iitbhu.ac.in/",
+    color: "from-yellow-100 to-orange-100",
+    features: ["Startup Mentorship", "Funding Support", "Networking Events"]
+  },
+  {
+    id: 2,
+    title: "NCL-IIT BHU Incubation Centre",
+    shortTitle: "NCL-IIT BHU",
+    description: "A Northern Coalfields Limited (NCL) CSR initiative funded incubator focusing on sustainable and impactful innovations.",
+    logo: <Zap className="w-12 h-12 text-blue-500" />,
+    category: "CSR Initiative",
+    website: "https://ncl-iitbhu.ac.in/",
+    color: "from-blue-100 to-indigo-100",
+    features: ["CSR Funding", "Sustainable Tech", "Industry Partnership"]
+  },
+  {
+    id: 3,
+    title: "R-ABI, IIT BHU",
+    shortTitle: "R-ABI",
+    description: "An Agribusiness and Agri-preneurship focused incubator at IIT BHU promoting agricultural innovation and rural development.",
+    logo: <Sprout className="w-12 h-12 text-green-500" />,
+    category: "Agribusiness",
+    website: "https://rabi.iitbhu.ac.in/",
+    color: "from-green-100 to-emerald-100",
+    features: ["Agricultural Innovation", "Rural Development", "Agri-preneurship"]
+  },
+  {
+    id: 4,
+    title: "Cisco thingQbator",
+    shortTitle: "ThingQbator",
+    description: "An internal makerspace 'Internet of Things' - focused incubator fostering IoT innovation and connected device development.",
+    logo: <Cpu className="w-12 h-12 text-purple-500" />,
+    category: "IoT Focus",
+    website: "https://cisco-thingqbator.com/",
+    color: "from-purple-100 to-pink-100",
+    features: ["IoT Development", "Connected Devices", "Hardware Support"]
+  },
+  {
+    id: 5,
+    title: "IDAPT-Hub Foundation",
+    shortTitle: "IDAPT-Hub",
+    description: "Technology Innovation Hub for 'Data Analytics and Predictive Technologies' driving data-driven innovation solutions.",
+    logo: <BarChart3 className="w-12 h-12 text-red-500" />,
+    category: "Data Analytics",
+    website: "https://idapt-hub.ac.in/",
+    color: "from-red-100 to-rose-100",
+    features: ["Data Analytics", "Predictive Tech", "AI/ML Support"]
+  },
+  {
+    id: 6,
+    title: "Innovation & Start-up Policy IIT BHU",
+    shortTitle: "Startup Policy",
+    description: "Official Startup Policy of IIT BHU providing framework and guidelines for entrepreneurial activities within the institute.",
+    logo: <Rocket className="w-12 h-12 text-indigo-500" />,
+    category: "Policy Framework",
+    website: "https://startup-policy.iitbhu.ac.in/",
+    color: "from-indigo-100 to-purple-100",
+    features: ["Policy Framework", "Guidelines", "Institutional Support"]
+  }
+];
 
 const IncubatorPage = ({
   title,
@@ -29,245 +101,123 @@ const IncubatorPage = ({
   services=[],
   currentDatai3=[],
 }) => {
+
+  const handleCardClick = (website) => {
+    window.open(website, '_blank', 'noopener,noreferrer');
+  };
   return (
-    <div className="body">
-      <Nav />
-
-      <div className="heading mt-[40px] text-center sm:mt-[60px]">
-        <h1 className="text-3xl font-bold text-[#333] sm:text-4xl lg:text-6xl">
-          {title} <span className="text-[#DD6D23]">{highlightedTitle}</span>
-        </h1>
-      </div>
-
-      <div className="para mt-5 ml-2 bg-[#fde2ca] rounded-full p-4 max-w-[400px] sm:max-w-[800px] sm:p-8 mx-auto mb-5 sm:mt-10">
-        <p className="text-lg text-[#333] text-center sm:text-xl">{description}</p>
-      </div>
+   <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
      
-      <div className="flex flex-col-reverse sm:flex-row items-center">
+      <div className="relative overflow-hidden bg-gradient-to-r from-orange-600 to-yellow-600 text-white">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+        <div className="relative container mx-auto px-4 py-20 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+            Innovation <span className="text-yellow-200">Incubators</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+            Discover our ecosystem of incubators fostering innovation, entrepreneurship, and technological advancement
+          </p>
+          <div className="flex justify-center items-center space-x-2 text-lg">
+            <Lightbulb className="w-6 h-6 animate-pulse" />
+            <span>Nurturing Ideas Into Reality</span>
+          </div>
+        </div>
+      </div>
+
       
-        <div className="flex justify-center sm:justify-start w-full sm:w-1/2">
-      
-          <div className="shadow-md rounded-lg p-4 mt-6 w-full sm:p-8 sm:mt-8 sm:ml-6 sm:w-[95%]">
-          {i3Logo ? (
-            <>
-            <div className="flex  justify-center mb-3 mr-16">
-            <Image src={i3Logo} height={100} width={100} alt={`${title} logo`} />
-            </div>
-           
-            </>
-           )
-           : (
-              <div></div>
-          ) }
-          {idaptLogo ? (
-            <>
-            <div className="flex  justify-center mb-3 mr-16">
-            <Image src={idaptLogo} height={100} width={250} alt={`${title} logo`} />
-            </div>
-           
-            </>
-           )
-           : (
-              <div></div>
-          ) } 
-          {nclLogo ? (
-            <>
-            <div className="flex  justify-center mb-2 mr-16">
-            <Image src={nclLogo} height={100} width={250} alt={`${title} logo`} />
-            </div>
-           
-            </>
-           )
-           : (
-              <div></div>
-          ) }
-            <div className="flex items-center mb-3">
-          
-              {logoSrc ? (
-                <>
-                  <div className="text-2xl font-semibold mr-2 sm:text-[2.5rem]">What is</div>
-                  <Image src={logoSrc} height={48} width={243} alt={`${title} logo`} />
-                </>
-              ) : (
-                <div className="text-2xl font-semibold sm:text-[2.5rem] mr-2">
-                  {title2} <span className="text-[#DD6D23]">{highlightedTitle}</span>
-                  {title3 && <span className="ml-2 text-[#4F4F52]">{title3}</span>}
-                </div>
-              )}
-              {questionMarkSrc && <Image src={questionMarkSrc} height={30} width={20} alt="" />}
-            </div>
-            <p className="text-base sm:text-[1.2rem] text-[#676767]">{description2}</p>
-            <button
-              className="px-2 py-1 mt-4 text-base font-bold rounded-full bg-[#DD6D23] text-white sm:px-3 sm:py-2 sm:mt-6 sm:text-lg"
-              onClick={() => (window.location.href = buttonLink)}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-orange-600 mb-2">6+</div>
+            <div className="text-gray-600">Active Incubators</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-orange-600 mb-2">100+</div>
+            <div className="text-gray-600">Startups Supported</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+            <div className="text-gray-600">Mentors</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-orange-600 mb-2">₹10Cr+</div>
+            <div className="text-gray-600">Funding Facilitated</div>
+          </div>
+        </div>
+
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {incubators.map((incubator) => (
+            <Card 
+              key={incubator.id}
+              className={`group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${incubator.color} border-0 overflow-hidden`}
+              onClick={() => handleCardClick(incubator.website)}
             >
-              {buttonText}
+              <CardHeader className="pb-4">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="p-3 rounded-full bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {incubator.logo}
+                  </div>
+                  <ExternalLink className="w-5 h-5 text-gray-500 group-hover:text-orange-600 transition-colors duration-300" />
+                </div>
+                <CardTitle className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-700 transition-colors duration-300">
+                  {incubator.title}
+                </CardTitle>
+                <Badge variant="secondary" className="w-fit bg-white/70 text-gray-700">
+                  {incubator.category}
+                </Badge>
+              </CardHeader>
+              
+              <CardContent className="pt-0">
+                <CardDescription className="text-gray-700 mb-6 leading-relaxed">
+                  {incubator.description}
+                </CardDescription>
+                
+                <div className="space-y-3">
+                  <div className="text-sm font-semibold text-gray-800 mb-2">Key Features:</div>
+                  <div className="flex flex-wrap gap-2">
+                    {incubator.features.map((feature, index) => (
+                      <Badge 
+                        key={index} 
+                        variant="outline" 
+                        className="text-xs bg-white/50 border-gray-300 text-gray-700"
+                      >
+                        {feature}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-white/50">
+                  <div className="flex items-center justify-between text-sm text-gray-600">
+                    <span className="font-medium">Click to visit website</span>
+                    <div className="flex items-center space-x-1 text-orange-600 group-hover:translate-x-1 transition-transform duration-300">
+                      <span>Learn More</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        
+        <div className="mt-20 text-center bg-gradient-to-r from-orange-600 to-yellow-600 rounded-2xl p-12 text-white">
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join our thriving ecosystem of innovators and entrepreneurs
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 hover:scale-105 transform">
+              Apply Now
+            </button>
+            <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-300 hover:scale-105 transform">
+              Contact Us
             </button>
           </div>
         </div>
-
-        <div className="flex justify-center w-full sm:w-1/2">
-          <div className="w-[90%] sm:w-full">
-            <Image src={mainImage} alt={`${title} image`} layout="responsive" width={640} height={426} />
-          </div>
-        </div>
       </div>
-
-      {i3Image && (
-        <div className="flex justify-center items-center mt-10 md:mt-12 lg:mt-16">
-          <div className="image-container w-full max-w-[700px] h-auto">
-            <Image src={i3Image} alt="I3 Foundation" layout="responsive" width={700} height={700} />
-          </div>
-        </div>
-      )}
-
-      {selectionCriteria.length > 0 && (
-        <>
-          <div className="bg-[#D9D9D9C4] h-[60px] shadow-md flex items-center mt-8 justify-center sm:h-[90px] mb-6 sm:mb-8">
-            <p className="text-2xl text-[#4F4F52] font-black sm:text-[3rem] ml-3 sm:ml-[90px] m-0">Selection Criteria</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-            {selectionCriteria.map((sc, index) => (
-              <div key={index} className="p-3 bg-white rounded-lg shadow-lg sm:p-4">
-                <h3 className="text-lg font-bold sm:text-xl mb-2">{sc.title}</h3>
-                <p className="text-sm text-[#676767] sm:text-base">{sc.description}</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {programs.length > 0 && (
-        <>
-          <div className="bg-[#D9D9D9C4] h-[60px] shadow-md flex items-center mt-8 justify-center sm:h-[90px] mb-6 sm:mb-8">
-            <p className="text-2xl text-[#4F4F52] font-black sm:text-[3rem] ml-3 sm:ml-[90px] m-0">Programs</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10 ">
-            {programs.map((program, index) => (
-              <div key={index} className="p-3  rounded-lg shadow-lg sm:p-4 bg-orange-100">
-                <h3 className="text-lg font-bold sm:text-xl mb-2">{program.title}</h3>
-                <p className="text-sm text-[#676767] sm:text-base">{program.description}</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-      {facilities.length > 0 && (
-  <>
-    <div className="bg-[#D9D9D9C4] h-[60px] shadow-md flex items-center mt-8 justify-center sm:h-[90px] mb-6 sm:mb-8">
-      <p className="text-2xl text-[#4F4F52] font-black sm:text-[3rem] ml-3 sm:ml-[90px] m-0">
-        Provided Facilities
-      </p>
-    </div>
-
-    <div className="grid grid-cols-4 gap-2 sm:gap-6 lg:gap-1">
-      {facilities.map((program, index) => (
-        <div 
-          key={index} 
-          className="p-3 rounded-lg shadow-lg bg-orange-100 flex flex-col items-center justify-center"
-          style={{ width: '300px', height: '300px' }} 
-        >
-          {/* Title */}
-          <h3 className="text-2xl font-bold text-center mt-3">{program.title}</h3>
-          
-          {/* Image */}
-          <img 
-            src={program.image} 
-            alt={program.title} 
-            className="w-26 h-26 object-cover rounded-md mb-4 mt-8"
-          />
-        </div>
-      ))}
-    </div>
-  </>
-)}
-
-
-      {currentData.length > 0 && (
-  <>
-    <div className="bg-[#D9D9D9C4] h-[60px] shadow-md flex items-center mt-8 justify-center sm:h-[90px] mb-6 sm:mb-8">
-      <p className="text-2xl text-[#4F4F52] font-black sm:text-[3rem] ml-3 sm:ml-[90px] m-0">
-        Achievements
-      </p>
-    </div>
-
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-10 ">
-      {currentData.map((data, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center justify-center bg-orange-100 rounded-lg shadow-lg p-4 mb-10"
-        >
-          <div className="text-yellow-500 text-6xl mb-3">
-            {index === 0 && <span >💡</span>}
-            {index === 1 && <span>📄</span>}
-            {index === 2 && <span>🔥</span>}
-            {index === 3 && <span>🚀</span>}
-          </div>
-          <a
-            href={data.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-4xl font-bold text-black "
-            style={{ textDecoration: 'none' }}
-          >
-            {data.title}
-          </a>
-          <a
-            href={data.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-2xl text-[#676767] mt-2 text-center"
-            style={{ textDecoration: 'none' }}
-          >
-            {data.description}
-          </a>
-        </div>
-      ))}
-    </div>
-  </>
-)}
-
-{currentDatai3.length > 0 && (
-  <>
-    <div className="bg-[#D9D9D9C4] h-[60px] shadow-md flex items-center mt-8 justify-center sm:h-[90px] mb-6 sm:mb-8">
-      <p className="text-2xl text-[#4F4F52] font-black sm:text-[3rem] ml-3 sm:ml-[90px] m-0">
-        Achievements
-      </p>
-    </div>
-
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-10">
-      {currentDatai3.map((data, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center justify-center  rounded-lg shadow-lg p-4 bg-orange-100 mb-10"
-        >
-          <a 
-            href={data.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-5xl font-bold text-black hover:underline"
-            style={{ textDecoration: 'none' }}
-          >
-            {data.title}
-          </a>
-          <a 
-            href={data.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-2xl text-[#676767] mt-2 text-center hover:underline"
-            style={{ textDecoration: 'none' }}
-          >
-            {data.description}
-          </a>
-        </div>
-      ))}
-    </div>
-  </>
-)}
-
-      <Footer />
     </div>
   );
 };
